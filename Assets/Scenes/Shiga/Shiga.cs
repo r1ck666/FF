@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shiga : MonoBehaviour {
 
+	GameObject a;
+
 	// Use this for initialization
 	void Start () {
 	}
