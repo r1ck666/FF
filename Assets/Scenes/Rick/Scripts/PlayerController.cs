@@ -23,7 +23,15 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float speed = 5;
 	[SerializeField] float jumpPower = 10.0f;
 
-	bool canJump = false;
+	bool canMove = true;
+	public bool CanMove {
+		get { return canMove; }
+		set { canMove = value; }
+	}
+	bool canJump = true;
+
+	float x;
+	// Debug用
 	[SerializeField] float distance;
 
 	// Use this for initialization
@@ -36,10 +44,11 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// 右・左
-        float x = Input.GetAxisRaw ("Horizontal");
-
-		rig2d.velocity = new Vector2 (x * speed, rig2d.velocity.y);
+		if (canMove) {
+			// 右・左
+			x = Input.GetAxisRaw ("Horizontal");
+			rig2d.velocity = new Vector2 (x * speed, rig2d.velocity.y);
+		}
 
 		bool isDown = Input.GetAxisRaw ("Vertical") < 0;
 
@@ -57,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonDown ("Jump") && canJump) {
+		if (Input.GetButtonDown ("Jump") && canJump && canMove) {
 			rig2d.velocity = new Vector2 (rig2d.velocity.x, jumpPower);
 		}
 
