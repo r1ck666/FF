@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour {
 	//static int hashIsDead = Animator.StringToHash ("IsDead");
 
 	[SerializeField, HideInInspector] Animator animator;
-	[SerializeField, HideInInspector]SpriteRenderer spriteRenderer;
-	[SerializeField, HideInInspector]Rigidbody2D rig2d;
+	[SerializeField, HideInInspector] SpriteRenderer spriteRenderer;
+	[SerializeField, HideInInspector] Rigidbody2D rig2d;
 
 	[SerializeField] private float characterHeightOffset = 0.2f;
 	[SerializeField] LayerMask groundMask;
@@ -65,6 +65,10 @@ public class PlayerController : MonoBehaviour {
 		animator.SetFloat (hashGroundDistance, distanceFromGround.distance == 0 ? 99 : distanceFromGround.distance - characterHeightOffset);
 		animator.SetFloat (hashFallSpeed, rig2d.velocity.y);
 		animator.SetFloat (hashSpeed, Mathf.Abs (x));
+
+		//if( Input.GetKeyDown(KeyCode.Z) ){  animator.SetTrigger(hashAttack1); }
+		//if( Input.GetKeyDown(KeyCode.X) ){  animator.SetTrigger(hashAttack2); }
+		//if( Input.GetKeyDown(KeyCode.C) ){  animator.SetTrigger(hashAttack3); }
 
 		// flip sprite
 		if (x != 0)
