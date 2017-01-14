@@ -9,6 +9,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	[SerializeField] private Text limitTimeText;
     [SerializeField] Text timeCount;
 
+	//スキルゲージ
+	[SerializeField] Slider slider;
+	float skillGage = 0;
+
 	//制限時間など
 	[SerializeField] int preCount = 5;
 	[SerializeField] float limitTime = 180.0f;
@@ -68,6 +72,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 		player.GetComponent<PlayerController>().CanMove = true;
 		isPlay = true;
 		StartCoroutine(LimitTime());
+		StartCoroutine(SkillCount());
 	}
 
 	void GameEnd () {
@@ -91,5 +96,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
         timeCount.text = "";
         timeCount.transform.parent.gameObject.SetActive(false);
     }
+
+	IEnumerator SkillCount() {
+		float coolTime = 10.0f; //現在選択しているスキルから取得する
+		float time = 0;
+		skillGage = 0;
+		while (skillGage < 1.0) {
+			yield return null;
+			skillGage += Time.deltaTime / coolTime;
+			slider.value = skillGage;
+		}
+	}
 
 }
