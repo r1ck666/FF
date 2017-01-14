@@ -9,7 +9,7 @@ public class Cursol : MonoBehaviour {
 	float time;
 	int spriteNum = 0;
 
-	string path = "uni";
+	[SerializeField] string path = "uni";
 	[SerializeField] float nextTime = 0.5f;
 
 	// Use this for initialization
