@@ -10,6 +10,9 @@ public class CursorCtrl : MonoBehaviour {
 	//スキルの格納
 	[SerializeField] GameObject skillObject;
 	[SerializeField] GameObject[] skillList;
+
+	//選択中のスキル番号
+	int skillNum = 0;
 	//スキルの発動位置
 	Vector3 skillPosition;
 	Skill skill;
@@ -34,9 +37,19 @@ public class CursorCtrl : MonoBehaviour {
 		cursorPosition = Camera.main.ScreenToWorldPoint(position);
 		//ワールド座標に変換されたマウス座標を代入
 		transform.position = cursorPosition;
+
+		// スキル発動
 		if (Input.GetButtonDown("Fire1")){
-			Debug.Log("Button");
 			SkillStart();
+		}
+
+		// スキル変更
+		if (Input.GetButtonDown("Fire2")) {
+			skillNum++;
+			if (skillNum == skillList.Length) {
+				skillNum = 0;
+			}
+			ChangeSkill(skillNum);
 		}
 	}
 
@@ -45,6 +58,11 @@ public class CursorCtrl : MonoBehaviour {
 		skillPosition = new Vector2 (cursorPosition.x - skill.FixedPosition.x, cursorPosition.y - skill.FixedPosition.y);
 		Instantiate(skill, skillPosition, Quaternion.identity);
 
+	}
+
+	void ChangeSkill(int n) {
+		skillObject = skillList[n];
+		skill = skillObject.GetComponent<Skill>();
 	}
 
 }
