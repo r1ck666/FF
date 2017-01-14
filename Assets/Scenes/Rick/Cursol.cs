@@ -21,10 +21,10 @@ public class Cursol : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		SpriteUpdate();
+		UpdateSprite();
 	}
 
-	void SpriteUpdate() {
+	void UpdateSprite() {
 		time += Time.deltaTime;
 		if (time > nextTime) {
 			time = 0;
