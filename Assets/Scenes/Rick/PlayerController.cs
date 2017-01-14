@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 
 	// 移動スピード
     [SerializeField] float speed = 5;
+	[SerializeField] float jumpPower = 10.0f;
 
 	bool canJump = false;
 	[SerializeField] float distance;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown ("Jump") && canJump) {
-			rig2d.velocity = new Vector2 (rig2d.velocity.x, 5);
+			rig2d.velocity = new Vector2 (rig2d.velocity.x, jumpPower);
 		}
 
 		// update animator parameters

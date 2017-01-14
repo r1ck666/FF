@@ -29,7 +29,7 @@ public class CursorCtrl : MonoBehaviour {
 		//Vector3でマウスの位置座標を取得
 		Vector3 position = Input.mousePosition;
 		//Z軸修正
-		position.z = 9.9f;
+		position.z = 5.0f;
 		//マウス位置座標をスクリーン座標からワールド座標に変換する
 		cursorPosition = Camera.main.ScreenToWorldPoint(position);
 		//ワールド座標に変換されたマウス座標を代入
@@ -44,7 +44,7 @@ public class CursorCtrl : MonoBehaviour {
 
 		skillPosition = new Vector2 (cursorPosition.x - skill.FixedPosition.x, cursorPosition.y - skill.FixedPosition.y);
 		Instantiate(skill, skillPosition, Quaternion.identity);
-		
+
 	}
 
 }
