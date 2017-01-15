@@ -11,6 +11,7 @@ public class Title : MonoBehaviour {
 	void Awake() {
 		Global.SetButtonManager();
 		Global.SetSoundManager();
+		Global.SetGameManager();
 		_titleObj = transform.gameObject;
 
 		// サウンドをロード
