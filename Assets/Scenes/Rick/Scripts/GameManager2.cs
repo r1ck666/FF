@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  // LoadSceneを使うために必要！！！！！
 
 public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
+	public GameObject[] _enemyObj;
 
 	//UI関連
 	[SerializeField] private Text limitTimeText;
@@ -17,9 +19,6 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	[SerializeField] int preCount = 5;
 	[SerializeField] float limitTime = 180.0f;
 
-	[SerializeField] GameObject playerPrefab;
-	[SerializeField] GameObject player;
-
 	bool isPlay = false;
 
 	protected override void Awake() {
@@ -27,7 +26,6 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	}
 
 	void Start() {
-		InitializePlayer();
 		StartCoroutine(Ready());
 	}
 
@@ -37,9 +35,6 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	}
 
 	void InitializePlayer() {
-		player = Instantiate(playerPrefab, new Vector3(10,1,1), Quaternion.identity);
-		player.GetComponent<PlayerController>().CanMove = false;
-		Camera.main.GetComponent<FollowCamera>().LookTarget = player.transform;
 	}
 
 	IEnumerator Ready () {
@@ -68,7 +63,6 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	}
 
 	void GameStart () {
-		player.GetComponent<PlayerController>().CanMove = true;
 		isPlay = true;
 		StartCoroutine(LimitTime());
 		StartCoroutine(SkillCount());
@@ -79,16 +73,16 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	}
 
 	public void TimeCount (string count) {
-        timeCount.transform.parent.gameObject.SetActive(true);
-        timeCount.text = count;
-        iTween.ScaleFrom(timeCount.gameObject, iTween.Hash(
-				"x", 0,
-				"y", 0,
-				"z", 0,
-                "time", 1,
-				"oncomplete", "CloseTimeCount",
-				"oncompletetarget", this.gameObject
-			));
+   //     timeCount.transform.parent.gameObject.SetActive(true);
+   //     timeCount.text = "TIME : " + count;
+   //     iTween.ScaleFrom(timeCount.gameObject, iTween.Hash(
+			//	"x", 0,
+			//	"y", 0,
+			//	"z", 0,
+   //             "time", 1,
+			//	"oncomplete", "CloseTimeCount",
+			//	"oncompletetarget", this.gameObject
+			//));
     }
 
     void CloseTimeCount() {
