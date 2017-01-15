@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 	bool canJump = true;
 
 	float x;
+	[SerializeField] float smashTime = 1.0f;
 	// Debug用
 	[SerializeField] float distance;
 
@@ -93,16 +94,62 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public int direction = 0;
+
 	//敵に当たった時に死ぬ
 	void OnTriggerEnter2D(Collider2D coll) {
 		//レイヤー名を取得
 	  string layerName = LayerMask.LayerToName(coll.gameObject.layer);
 		if (layerName == "Enemy"){
-			Debug.Log("エネミーに当たりました");
-			//ここにリザルト遷移のメソッド！
-			//GameManager.Instance.GameEnd();
-		}
+			float x = Random.Range(0.0f, vec.x);
+			float y = Random.Range(0.0f, vec.y);
+			float z = Random.Range(0.0f, vec.z);
+			Vector3 diff = new Vector3(x, y, z);
+			diff = diff.normalized;
 
+			diff = vec;
+			//this.gameObject.GetComponent<Rigidbody2D>().AddForce(diff * test, ForceMode2D.Impulse);
+			if ( canMove ) {
+				if (coll.gameObject.transform.localScale.x > 0) {
+					direction = -1;
+				} else {
+					direction = 1;
+				}
+				StartCoroutine(Smashed(direction));
+			}
+			Debug.Log(diff + "hoge");
+
+		}
+	}
+
+	public float test = 20f;
+	public Vector3 vec;
+
+	IEnumerator Smashed(int dic) {
+		canMove = false;
+		float time = 0;
+		float x1 = 0;
+		float y1 = 0;
+		float z1 = 0;
+
+		// xを0に
+		var vel = rig2d.velocity;
+		vel.x = 0.0f;
+		vel.y = 5.0f;
+		rig2d.velocity = vel;
+
+		while (time < smashTime) {
+			Debug.Log("smashed");
+			yield return null;
+			time += Time.deltaTime;
+			x1 += Time.deltaTime;
+			y1 += Time.deltaTime;
+			z1 += Time.deltaTime;
+			if (time < 0.5f) {
+				this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(dic * x1 * test, y1 * test , z1 * test), ForceMode2D.Impulse);
+			}
+		}
+		canMove = true;
 	}
 
 }
