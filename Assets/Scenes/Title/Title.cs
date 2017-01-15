@@ -36,6 +36,6 @@ public class Title : MonoBehaviour {
 
 	private IEnumerator DelayMethod(float waitTime) {
 		yield return new WaitForSeconds(waitTime);  // waitTime後に実行する
-		SceneManager.LoadScene("Game");             // シーン切り替え
+		SceneManager.LoadScene("MasterGame");             // シーン切り替え
 	}
 }
