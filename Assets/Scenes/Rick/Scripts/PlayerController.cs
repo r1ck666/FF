@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour {
 			pos.x = 0.5f;
 			pos.y = 2f;
 			transform.position = pos;
+			Global.GameMng.Time -= 10;
 		}
 	}
 
@@ -101,6 +102,8 @@ public class PlayerController : MonoBehaviour {
 		//レイヤー名を取得
 	  string layerName = LayerMask.LayerToName(coll.gameObject.layer);
 		if (layerName == "Enemy"){
+			Global.GameMng.Score -= 100;
+			coll.gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
 			float x = Random.Range(0.0f, vec.x);
 			float y = Random.Range(0.0f, vec.y);
 			float z = Random.Range(0.0f, vec.z);
@@ -139,7 +142,6 @@ public class PlayerController : MonoBehaviour {
 		rig2d.velocity = vel;
 
 		while (time < smashTime) {
-			Debug.Log("smashed");
 			yield return null;
 			time += Time.deltaTime;
 			x1 += Time.deltaTime;

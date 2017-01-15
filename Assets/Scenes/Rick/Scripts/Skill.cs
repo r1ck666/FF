@@ -96,7 +96,7 @@ public class Skill : MonoBehaviour {
 	  string layerName = LayerMask.LayerToName(coll.gameObject.layer);
 		if (layerName == "Enemy"){
 			Debug.Log("押したぜ");
-
+			coll.gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
 			float x = Random.Range(0.0f, 10.0f);
 			float y = Random.Range(0.0f, 10.0f);
 			float z = Random.Range(0.0f, 10.0f);
