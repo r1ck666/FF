@@ -9,7 +9,7 @@ public class Cursol : MonoBehaviour {
 	float time;
 	int spriteNum = 0;
 
-	string path = "uni";
+	[SerializeField] string path = "uni";
 	[SerializeField] float nextTime = 0.5f;
 
 	// Use this for initialization
@@ -21,10 +21,10 @@ public class Cursol : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		SpriteUpdate();
+		UpdateSprite();
 	}
 
-	void SpriteUpdate() {
+	void UpdateSprite() {
 		time += Time.deltaTime;
 		if (time > nextTime) {
 			time = 0;
