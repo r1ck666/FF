@@ -84,6 +84,13 @@ public class PlayerController : MonoBehaviour {
 		if (x != 0)
 			spriteRenderer.flipX = x < 0;
 
+		// 落ちたな(確信)
+		if (transform.position.y <= -0.5f) {
+			Vector3 pos = transform.position;
+			pos.x = 0.5f;
+			pos.y = 2f;
+			transform.position = pos;
+		}
 	}
 
 	//敵に当たった時に死ぬ
@@ -92,10 +99,10 @@ public class PlayerController : MonoBehaviour {
 	  string layerName = LayerMask.LayerToName(coll.gameObject.layer);
 		if (layerName == "Enemy"){
 			Debug.Log("エネミーに当たりました");
-			Destroy(coll.gameObject);
 			//ここにリザルト遷移のメソッド！
 			//GameManager.Instance.GameEnd();
 		}
+
 	}
 
 }

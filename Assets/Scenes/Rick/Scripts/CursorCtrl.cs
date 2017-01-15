@@ -65,4 +65,27 @@ public class CursorCtrl : MonoBehaviour {
 		skill = skillObject.GetComponent<Skill>();
 	}
 
+	void OnTriggerStay2D(Collider2D coll)
+	{
+		Debug.Log("カーソルがエネミーに当たりました");
+
+		//レイヤー名を取得
+		string layerName = LayerMask.LayerToName(coll.gameObject.layer);
+		if (layerName == "Enemy")
+		{
+			if (Input.GetButtonDown("Fire1"))
+			{
+				Debug.Log("押したぜ");
+
+				float x = Random.Range(0.0f, 10.0f);
+				float y = Random.Range(0.0f, 10.0f);
+				float z = Random.Range(0.0f, 10.0f);
+				Vector3 diff = new Vector3(x, y, z);
+				diff = diff.normalized;
+				coll.gameObject.GetComponent<Rigidbody2D>().AddForce(diff * 20f, ForceMode2D.Impulse);
+			}
+		}
+
+	}
+
 }

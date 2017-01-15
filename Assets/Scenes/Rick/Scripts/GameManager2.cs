@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : SingletonMonoBehaviour<GameManager> {
+public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 
 	//UI関連
 	[SerializeField] private Text limitTimeText;
@@ -16,7 +16,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	//制限時間など
 	[SerializeField] int preCount = 5;
 	[SerializeField] float limitTime = 180.0f;
-
 
 	[SerializeField] GameObject playerPrefab;
 	[SerializeField] GameObject player;

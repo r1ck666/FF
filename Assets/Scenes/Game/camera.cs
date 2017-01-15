@@ -20,8 +20,8 @@ public class camera : MonoBehaviour {
         //プレイヤーの高さ取得
         float playerWidth = playerTransform.position.x;
 
-		Vector2 sizeMax = new Vector2(transform.position.x + 1.0f, transform.position.y + 0.1f);
-		Vector2 sizeMin = new Vector2(transform.position.x - 0.8f, transform.position.y - 0.1f);
+		Vector2 sizeMax = new Vector2(transform.position.x + 1.0f, transform.position.y + 0.1f - 1.6f);
+		Vector2 sizeMin = new Vector2(transform.position.x - 0.8f, transform.position.y - 0.1f - 1.6f);
 
 		if (playerTransform.position.x > sizeMax.x) {
 			Vector3 pos = transform.position;

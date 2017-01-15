@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Enemy
+  - Cursol
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Enemies
     uniqueID: 1963054807
+    locked: 0
+  - name: Cursol
+    uniqueID: 3819534921
     locked: 0

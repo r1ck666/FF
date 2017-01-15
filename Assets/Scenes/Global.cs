@@ -23,6 +23,9 @@ public static class Global
 	static SoundManager _soundMng;
 	public static SoundManager SoundMng { get { return _soundMng; } }
 
+	static GameManager _gameMng;
+	public static GameManager GameMng { get { return _gameMng; } }
+
 	//前回のシーン保存用
 	static List<string> _prevScenes = new List<string>(50);
     static string _token;
@@ -39,6 +42,11 @@ public static class Global
 	public static void SetSoundManager()
 	{
 		_soundMng = SoundManager.GetInstance();
+	}
+
+	public static void SetGameManager()
+	{
+		_gameMng = GameManager.Instance;
 	}
 
 	public static void AddPrevScenes(string addName)
