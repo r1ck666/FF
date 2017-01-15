@@ -28,7 +28,6 @@ public class MasterGame : MonoBehaviour {
 	{
 		Fader.instance.BlackIn();
 		this.SetObject();
-		this.SetAction();
 		_count = 0;
 	}
 
@@ -71,15 +70,6 @@ public class MasterGame : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(waitTime);  // waitTime後に実行する
 		SceneManager.LoadScene("Result");             // シーン切り替え
-	}
-
-	void SetAction()
-	{
-		GameObject btn = transform.Find("Canvas/ResultButton").gameObject;
-		Global.ButtonMng.SetAction(btn, () => {
-			Fader.instance.BlackOut();              // フェードアウト
-			StartCoroutine(DelayMethod(1.2f));      // 1.2秒後に実行する
-		});
 	}
 
 	void SetObject()
