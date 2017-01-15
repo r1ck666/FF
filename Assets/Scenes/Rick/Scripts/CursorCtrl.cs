@@ -54,10 +54,10 @@ public class CursorCtrl : MonoBehaviour {
 	}
 
 	void SkillStart () {
-
-		skillPosition = new Vector2 (cursorPosition.x - skill.FixedPosition.x, cursorPosition.y - skill.FixedPosition.y);
-		Instantiate(skill, skillPosition, Quaternion.identity);
-
+		if (GameManager2.Instance.StartSkillGage(skillNum)){
+			skillPosition = new Vector2 (cursorPosition.x - skill.FixedPosition.x, cursorPosition.y - skill.FixedPosition.y);
+			Instantiate(skill, skillPosition, Quaternion.identity);
+		}
 	}
 
 	void ChangeSkill(int n) {

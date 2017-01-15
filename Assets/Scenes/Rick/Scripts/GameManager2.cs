@@ -19,6 +19,9 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	[SerializeField] int preCount = 5;
 	[SerializeField] float limitTime = 180.0f;
 
+	bool[] canSkill = new bool[5];
+	public Slider[] _slider;
+
 	bool isPlay = false;
 
 	protected override void Awake() {
@@ -27,6 +30,12 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 
 	void Start() {
 		StartCoroutine(Ready());
+		foreach(var slider in _slider) {
+			slider.value = 1.0f;
+		}
+		for (int i=0; i<canSkill.Length; i++){
+			canSkill[i] = true;
+		}
 	}
 
 	// Update is called once per frame
@@ -65,7 +74,6 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	void GameStart () {
 		isPlay = true;
 		StartCoroutine(LimitTime());
-		StartCoroutine(SkillCount());
 	}
 
 	void GameEnd () {
@@ -90,6 +98,15 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
         timeCount.transform.parent.gameObject.SetActive(false);
     }
 
+	public bool StartSkillGage(int n) {
+		if (canSkill[n]) {
+			StartCoroutine(SkillCount(n));
+			return true;
+		} else {
+			return false;
+		}
+	}
+	/*
 	IEnumerator SkillCount() {
 		float coolTime = 10.0f; //現在選択しているスキルから取得する
 		float time = 0;
@@ -99,6 +116,36 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 			skillGage += Time.deltaTime / coolTime;
 			slider.value = skillGage;
 		}
+	}
+	*/
+
+	IEnumerator SkillCount(int n) {
+		canSkill[n] = false;
+		float coolTime = 0;
+		switch (n) {
+			case 0:
+				coolTime = 2.0f;
+				break;
+			case 1:
+				coolTime = 3.0f;
+				break;
+			case 2:
+				coolTime = 3.0f;
+				break;
+			case 3:
+				coolTime = 3.0f;
+				break;
+			case 4:
+				coolTime = 3.0f;
+				break;
+		}
+		float skillGage = 0;
+		while (skillGage < 1.0) {
+			yield return null;
+			skillGage += UnityEngine.Time.deltaTime / coolTime;
+			_slider[n].value = skillGage;
+		}
+		canSkill[n] = true;
 	}
 
 }
