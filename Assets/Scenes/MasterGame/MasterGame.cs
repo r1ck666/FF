@@ -79,7 +79,7 @@ public class MasterGame : MonoBehaviour {
 		this._scoreText = transform.Find("Canvas/Top_UI/ScoreText").gameObject;
 		this._timeText = transform.Find("Canvas/Top_UI/LimitaTimeText").gameObject;
 		this._gameMng.Score = 0;
-		this._gameMng.Time = 60;
+		this._gameMng.Time = 2;
 	}
 
 }
