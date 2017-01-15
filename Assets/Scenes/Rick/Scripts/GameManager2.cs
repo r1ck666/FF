@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;  // LoadSceneを使うために必要！！�
 public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	public GameObject[] _enemyObj;
 
+	public GameObject playerObject;
+	PlayerController player;
+
 	//UI関連
 	[SerializeField] private Text limitTimeText;
     [SerializeField] Text timeCount;
 
-	//スキルゲージ
-	[SerializeField] Slider slider;
 	float skillGage = 0;
 
 	//制限時間など
@@ -23,12 +24,18 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	public Slider[] _slider;
 
 	bool isPlay = false;
+	public bool IsPlay {
+		get { return isPlay; }
+		set { isPlay = value; }
+	}
 
 	protected override void Awake() {
 		base.Awake();
 	}
 
 	void Start() {
+		player = playerObject.GetComponent<PlayerController>();
+		InitializePlayer();
 		StartCoroutine(Ready());
 		foreach(var slider in _slider) {
 			slider.value = 1.0f;
@@ -44,6 +51,7 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	}
 
 	void InitializePlayer() {
+		player.CanMove = false;
 	}
 
 	IEnumerator Ready () {
@@ -73,6 +81,7 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 
 	void GameStart () {
 		isPlay = true;
+		player.CanMove = false;
 		StartCoroutine(LimitTime());
 	}
 
@@ -81,16 +90,16 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 	}
 
 	public void TimeCount (string count) {
-   //     timeCount.transform.parent.gameObject.SetActive(true);
-   //     timeCount.text = "TIME : " + count;
-   //     iTween.ScaleFrom(timeCount.gameObject, iTween.Hash(
-			//	"x", 0,
-			//	"y", 0,
-			//	"z", 0,
-   //             "time", 1,
-			//	"oncomplete", "CloseTimeCount",
-			//	"oncompletetarget", this.gameObject
-			//));
+        timeCount.transform.parent.gameObject.SetActive(true);
+        timeCount.text = count;
+       	iTween.ScaleFrom(timeCount.gameObject, iTween.Hash(
+				"x", 0,
+				"y", 0,
+				"z", 0,
+                "time", 1,
+				"oncomplete", "CloseTimeCount",
+				"oncompletetarget", this.gameObject
+			));
     }
 
     void CloseTimeCount() {

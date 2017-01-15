@@ -1942,7 +1942,7 @@ Prefab:
         type: 2}
       propertyPath: timeCount
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 903417546}
     - target: {fileID: 114295040742245636, guid: 3fe1dbcb223cb43618effba5a084de5a,
         type: 2}
       propertyPath: limitTimeText
@@ -1973,6 +1973,11 @@ Prefab:
       propertyPath: _slider.Array.data[4]
       value: 
       objectReference: {fileID: 514453427}
+    - target: {fileID: 114295040742245636, guid: 3fe1dbcb223cb43618effba5a084de5a,
+        type: 2}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 1848950738}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fe1dbcb223cb43618effba5a084de5a, type: 2}
   m_IsPrefabParent: 0
