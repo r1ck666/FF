@@ -38,18 +38,20 @@ public class CursorCtrl : MonoBehaviour {
 		//ワールド座標に変換されたマウス座標を代入
 		transform.position = cursorPosition;
 
-		// スキル発動
-		if (Input.GetButtonDown("Fire1")){
-			SkillStart();
-		}
-
-		// スキル変更
-		if (Input.GetButtonDown("Fire2")) {
-			skillNum++;
-			if (skillNum == skillList.Length) {
-				skillNum = 0;
+		if (GameManager2.Instance.IsPlay) {
+			// スキル発動
+			if (Input.GetButtonDown("Fire1")){
+				SkillStart();
 			}
-			ChangeSkill(skillNum);
+
+			// スキル変更
+			if (Input.GetButtonDown("Fire2")) {
+				skillNum++;
+				if (skillNum == skillList.Length) {
+					skillNum = 0;
+				}
+				ChangeSkill(skillNum);
+			}
 		}
 	}
 

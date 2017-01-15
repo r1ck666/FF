@@ -81,7 +81,7 @@ public class GameManager2 : SingletonMonoBehaviour<GameManager2> {
 
 	void GameStart () {
 		isPlay = true;
-		player.CanMove = false;
+		player.CanMove = true;
 		StartCoroutine(LimitTime());
 	}
 

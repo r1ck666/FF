@@ -33,25 +33,28 @@ public class MasterGame : MonoBehaviour {
 
 	void Update()
 	{
-		_timeleft -= Time.deltaTime;
-		if (_timeleft <= 0.0)
+		if(GameManager2.Instance.IsPlay)
 		{
-			_timeleft = 1.0f;
-
-			this._gameMng.Time -= 1;
-		}
-
-		int enemyCnt = (int)((60 - this._gameMng.Time) / 4);
-
-		_count++;
-		if (_count > 60 * 3)
-		{
-			_count = 0;
-			for (int i = 0; i < enemyCnt; i++)
+			_timeleft -= Time.deltaTime;
+			if (_timeleft <= 0.0)
 			{
-				int index = Random.Range(0, _enemyObj.Length);
-				GameObject enemy = GameObjectUtils.Clone(_enemyObj[index]);
-				enemy.transform.position = new Vector3(0, 5, 0);
+				_timeleft = 1.0f;
+
+				this._gameMng.Time -= 1;
+			}
+
+			int enemyCnt = (int)((60 - this._gameMng.Time) / 4);
+
+			_count++;
+			if (_count > 60 * 3)
+			{
+				_count = 0;
+				for (int i = 0; i < enemyCnt; i++)
+				{
+					int index = Random.Range(0, _enemyObj.Length);
+					GameObject enemy = GameObjectUtils.Clone(_enemyObj[index]);
+					enemy.transform.position = new Vector3(0, 5, 0);
+				}
 			}
 		}
 
